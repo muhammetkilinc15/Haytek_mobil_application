@@ -1,0 +1,11 @@
+# request relay board HTTP CGI API
+
+http://192.168.7.1/input.cgi 
+
+
+http://192.168.7.1/api/v2/config.cgi :GET ==> Cihazın tüm verileri çekiliyor
+
+http://192.168.7.1/api/v2/mfr_info.cgi : POST ==> Cihaz upload
+
+
+http://192.168.7.1/task_set.cgi : POST // Haftanın belirli günleri kullanılması için planlama
