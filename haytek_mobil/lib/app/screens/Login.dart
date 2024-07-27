@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/constants/colors.dart';
-import 'package:haytek_mobil/screens/Register.dart';
-import 'package:haytek_mobil/screens/forget_screen.dart';
-import 'package:haytek_mobil/screens/home_screen.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
+import 'package:haytek_mobil/app/screens/Register.dart';
+import 'package:haytek_mobil/app/screens/forget_screen.dart';
+import 'package:haytek_mobil/app/screens/home_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Login extends StatelessWidget {

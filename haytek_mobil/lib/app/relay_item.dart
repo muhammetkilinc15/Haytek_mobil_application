@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/constants/colors.dart';
-import 'package:haytek_mobil/models/relay.dart';
-import 'package:haytek_mobil/screens/home_screen.dart';
-import 'package:haytek_mobil/screens/RelayTask.dart';
-import 'package:haytek_mobil/services/RelayControlService.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
+import 'package:haytek_mobil/app/models/relay_model.dart';
+import 'package:haytek_mobil/app/screens/RelayTask.dart';
+import 'package:haytek_mobil/app/screens/home_screen.dart';
+import 'package:haytek_mobil/app/services/RelayControlService.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class RelayItem extends StatefulWidget {
@@ -30,9 +30,11 @@ class _RelayItemState extends State<RelayItem> {
               widget.relayModel.isActive
                   ? Icons.light_mode_sharp
                   : Icons.lightbulb,
-              color: widget.relayModel.isActive ? Colors.green : Color.fromARGB(255, 188, 13, 0),
+              color: widget.relayModel.isActive
+                  ? Colors.green
+                  : Color.fromARGB(255, 188, 13, 0),
             ),
-            title: Text(widget.relayModel.name),
+            title: Text(widget.relayModel.name!),
             subtitle: Text(widget.relayModel.isActive ? 'Çalışıyor' : 'Pasif',
                 style: TextStyle(
                     color: Colors.black.withOpacity(0.6),
@@ -62,7 +64,7 @@ class _RelayItemState extends State<RelayItem> {
         setState(() {
           widget.relayModel.isActive = value;
           relayservice.sendRequest(
-              widget.relayModel.relay, widget.relayModel.isActive);
+              widget.relayModel.relay!, widget.relayModel.isActive);
         });
       },
     );
@@ -70,7 +72,10 @@ class _RelayItemState extends State<RelayItem> {
 
   PopupMenuButton<int> _PopupMenuMethod(BuildContext context) {
     return PopupMenuButton<int>(
-      icon: const Icon(Icons.edit_note_sharp,size: 30,),
+      icon: const Icon(
+        Icons.edit_note_sharp,
+        size: 30,
+      ),
       onSelected: (int value) {
         switch (value) {
           case 1:
@@ -90,7 +95,7 @@ class _RelayItemState extends State<RelayItem> {
             break;
         }
       },
-      itemBuilder: (BuildContext context) => <PopupMenuEntry<int>> [
+      itemBuilder: (BuildContext context) => <PopupMenuEntry<int>>[
         const PopupMenuItem<int>(
           value: 1,
           child: ListTile(

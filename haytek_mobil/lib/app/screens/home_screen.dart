@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/constants/colors.dart';
-import 'package:haytek_mobil/models/relay.dart';
-import 'package:haytek_mobil/relay_item.dart';
-import 'package:haytek_mobil/screens/Account.dart';
-import 'package:haytek_mobil/screens/Add_input_screen.dart';
-import 'package:haytek_mobil/screens/Login.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
+import 'package:haytek_mobil/app/config/images_path.dart';
+import 'package:haytek_mobil/app/models/relay_model.dart';
+import 'package:haytek_mobil/app/relay_item.dart';
+import 'package:haytek_mobil/app/screens/Account.dart';
+import 'package:haytek_mobil/app/screens/Add_input_screen.dart';
+import 'package:haytek_mobil/app/screens/Login.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,136 +20,7 @@ final password = 1515;
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
 
-  List<RelayModel> relays = [
-    RelayModel(
-        id: 1,
-        name: "Tarla Sontaj (Röle 1)",
-        type: 0,
-        relay: 0,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 2,
-        name: "Oturma Odası Klima (Röle 2)",
-        type: 0,
-        relay: 1,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 3,
-        name: "Röle 3",
-        type: 0,
-        relay: 2,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 4,
-        name: "Röle 4",
-        type: 0,
-        relay: 3,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 5,
-        name: "Röle 5",
-        type: 0,
-        relay: 4,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 6,
-        name: "Röle 6",
-        type: 0,
-        relay: 5,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 7,
-        name: "Röle 7",
-        type: 0,
-        relay: 6,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 8,
-        name: "Röle 8",
-        type: 0,
-        relay: 7,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 9,
-        name: "Röle 9",
-        type: 0,
-        relay: 8,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 10,
-        name: "Röle 10",
-        type: 0,
-        relay: 9,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 11,
-        name: "Röle 11",
-        type: 0,
-        relay: 10,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 12,
-        name: "Röle 12",
-        type: 0,
-        relay: 11,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 13,
-        name: "Röle 13",
-        type: 0,
-        relay: 12,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 14,
-        name: "Röle 14",
-        type: 0,
-        relay: 13,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 15,
-        name: "Röle 15",
-        type: 0,
-        relay: 14,
-        pwd: password,
-        isActive: false,
-        time: 0),
-    RelayModel(
-        id: 16,
-        name: "Röle 16",
-        type: 0,
-        relay: 15,
-        pwd: password,
-        isActive: false,
-        time: 0),
-  ];
+  List<RelayModel> relays = [];
 
   @override
   void initState() {
@@ -230,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   child: Container(
                     decoration: const BoxDecoration(
                         image: DecorationImage(
-                          image: AssetImage("lib/assets/images/haytekLogo.png"),
+                          image: AssetImage(hamburgerMenu),
                           fit: BoxFit
                               .cover, // resim container alanına tam oturcak
                         ),

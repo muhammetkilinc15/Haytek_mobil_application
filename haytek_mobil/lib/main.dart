@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/screens/Login.dart';
+import 'package:haytek_mobil/app/screens/Login.dart';
+import 'package:haytek_mobil/app/services/Context/database_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseService.initialize();
   runApp(const MyApp());
 }
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/app/constants/colors.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class MyAccountScreenState extends StatefulWidget {

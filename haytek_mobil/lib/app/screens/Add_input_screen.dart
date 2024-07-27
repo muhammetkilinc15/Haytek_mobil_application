@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/constants/colors.dart';
-import 'package:haytek_mobil/screens/home_screen.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
+import 'package:haytek_mobil/app/screens/home_screen.dart';
+
 import 'package:hexcolor/hexcolor.dart';
 
 class AddInputDevice extends StatefulWidget {

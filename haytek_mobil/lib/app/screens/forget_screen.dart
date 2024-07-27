@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:haytek_mobil/constants/colors.dart';
-import 'package:haytek_mobil/screens/Login.dart';
-import 'package:haytek_mobil/screens/Register.dart';
+import 'package:haytek_mobil/app/config/colors.dart';
+import 'package:haytek_mobil/app/screens/Login.dart';
+import 'package:haytek_mobil/app/screens/Register.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class ForgetPassword extends StatelessWidget {
