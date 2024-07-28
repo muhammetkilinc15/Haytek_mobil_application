@@ -1,5 +1,5 @@
 import 'package:haytek_mobil/app/Repositories/GenericRepository/IGenericRepository.dart';
-import 'package:haytek_mobil/app/services/Context/database_service.dart';
+import 'package:haytek_mobil/app/services/database_service.dart';
 import 'package:isar/isar.dart';
 
 class Repository<T> implements IRepository<T> {

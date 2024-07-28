@@ -1,13 +1,11 @@
 import 'package:isar/isar.dart';
-part 'relay_model.g.dart';
+import 'relay_model.dart';
+
+part 'device_model.g.dart';
 
 @collection
-class RelayModel {
+class DeviceModel {
   Id id = Isar.autoIncrement; // Auto Increment
-  int? type = 0;
   String? name = ""; // Röle 1-2... diye hep duracak
-  String? title; // anabaslık
-  int? relay;
-  bool isActive = false;
-  int? time = 0;
+  int? relayId; // RelayModel'in kimliğini saklayacak
 }

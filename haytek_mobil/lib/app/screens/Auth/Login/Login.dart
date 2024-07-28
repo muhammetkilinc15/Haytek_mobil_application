@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:haytek_mobil/app/config/colors.dart';
-import 'package:haytek_mobil/app/screens/Register.dart';
-import 'package:haytek_mobil/app/screens/forget_screen.dart';
-import 'package:haytek_mobil/app/screens/home_screen.dart';
+import 'package:haytek_mobil/app/screens/Auth/Register/Register.dart';
+import 'package:haytek_mobil/app/screens/Auth/ForgetPassword/forget_screen.dart';
+import 'package:haytek_mobil/app/screens/home/home_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
 
 class Login extends StatelessWidget {
@@ -119,7 +119,10 @@ class Login extends StatelessWidget {
                         style: TextStyle(fontSize: 18),
                       ),
                       GestureDetector(
-                        onTap: () => const Register(),
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Register())),
                         child: Text(
                           "Register ",
                           style: TextStyle(

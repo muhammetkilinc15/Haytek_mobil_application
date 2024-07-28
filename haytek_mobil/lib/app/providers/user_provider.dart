@@ -17,13 +17,16 @@ class UserProvider with ChangeNotifier {
       _users = await _userRepository.getAll();
       notifyListeners();
     } catch (e) {
-      // Hata mesajını konsola yazdır
       debugPrint('Error fetching users: $e');
     }
   }
 
   Future<void> addUser(UserModel user) async {
-    await _userRepository.add(user);
-    fetchUsers();
+    try {
+      await _userRepository.add(user);
+      fetchUsers();
+    } catch (e) {
+      debugPrint("error adding user");
+    }
   }
 }

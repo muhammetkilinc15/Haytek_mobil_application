@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class RelayTask extends StatefulWidget {
   const RelayTask({super.key});
@@ -39,40 +40,106 @@ class _RelayTaskState extends State<RelayTask> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Tarih ve Saat Seçimi',style: TextStyle(
-        color: Colors.white, 
-        
-        )
-       ),
-       iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text(
+          'Tarih ve Saat Seçimi',
+          style: TextStyle(color: Colors.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
         backgroundColor: Colors.blue,
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
             Text(
-              _selectedDate == null
-                  ? 'Tarih seçilmedi'
-                  : 'Seçilen Tarih: ${_selectedDate!.toLocal()}',
+              'Röleyi progralamak için bir tarih ve saat değeri girin',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
-            ElevatedButton(
-              onPressed: () => _selectDate(context),
-              child: Text('Tarih Seç'),
-            ),
-           const  SizedBox(height: 16.0),
-            Text(
-              _selectedTime == null
-                  ? 'Saat seçilmedi'
-                  : 'Seçilen Saat: ${_selectedTime!.format(context)}',
-            ),
-            ElevatedButton(
-              onPressed: () => _selectTime(context),
-              child: const Text('Saat Seç'),
+            const SizedBox(height: 16.0),
+            _buildDateCard(context),
+            const SizedBox(height: 16.0),
+            _buildTimeCard(context),
+            const Spacer(),
+            Align(
+              alignment: Alignment.bottomRight,
+              child: ElevatedButton(
+                onPressed: () {
+                  print('Button pressed ...');
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                ),
+                child: const Text(
+                  'Röle Programla',
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Widget _buildDateCard(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16.0),
+        title: Text(
+          _selectedDate == null
+              ? 'Tarih seçilmedi'
+              : 'Seçilen Tarih: ${_selectedDate!.toLocal().toShortDateString()}',
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.calendar_today_rounded),
+          color: Colors.blue,
+          onPressed: () => _selectDate(context),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTimeCard(BuildContext context) {
+    return Card(
+      elevation: 3,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12.0),
+      ),
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(16.0),
+        title: Text(
+          _selectedTime == null
+              ? 'Saat seçilmedi'
+              : 'Seçilen Saat: ${_selectedTime!.format(context)}',
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.access_time_rounded),
+          color: Colors.blue,
+          onPressed: () => _selectTime(context),
+        ),
+      ),
+    );
+  }
+}
+
+extension DateTimeExtensions on DateTime {
+  String toShortDateString() {
+    final DateFormat formatter = DateFormat('dd MMM yyyy');
+    return formatter.format(this);
   }
 }

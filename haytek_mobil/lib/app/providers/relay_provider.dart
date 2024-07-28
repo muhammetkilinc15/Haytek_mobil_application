@@ -28,5 +28,14 @@ class RelayProvider with ChangeNotifier {
     fetchRelays();
   }
 
-  // Diğer CRUD işlemleri için benzer metodlar ekleyebilirsiniz.
+  Future<void> updateRelay(RelayModel relay) async {
+    await _relayRepository.update(relay);
+    fetchRelays();
+  }
+
+  // Relay'leri güncellemek için yeni bir metod ekleyin
+  void updateRelays(List<RelayModel> updatedRelays) {
+    _relays = updatedRelays;
+    notifyListeners();
+  }
 }
