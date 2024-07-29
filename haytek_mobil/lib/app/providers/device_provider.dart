@@ -1,8 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:haytek_mobil/app/Repositories/DeviceRepository.dart';
-
 import 'package:haytek_mobil/app/models/device_model.dart';
-import 'package:haytek_mobil/app/models/user_model.dart';
 
 class DeviceProvider with ChangeNotifier {
   final DeviceRepository _deviceRepository;

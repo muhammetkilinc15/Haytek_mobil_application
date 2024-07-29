@@ -1,6 +1,4 @@
 import 'package:isar/isar.dart';
-import 'relay_model.dart';
-
 part 'device_model.g.dart';
 
 @collection
