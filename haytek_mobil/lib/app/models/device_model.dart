@@ -4,6 +4,6 @@ part 'device_model.g.dart';
 @collection
 class DeviceModel {
   Id id = Isar.autoIncrement; // Auto Increment
-  String? name = ""; // Röle 1-2... diye hep duracak
-  int? relayId; // RelayModel'in kimliğini saklayacak
+  late String name = ""; // Röle 1-2... diye hep duracak
+  late int relayId; // RelayModel'in kimliğini saklayacak
 }

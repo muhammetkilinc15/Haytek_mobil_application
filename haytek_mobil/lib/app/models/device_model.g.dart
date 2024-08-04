@@ -48,12 +48,7 @@ int _deviceModelEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  {
-    final value = object.name;
-    if (value != null) {
-      bytesCount += 3 + value.length * 3;
-    }
-  }
+  bytesCount += 3 + object.name.length * 3;
   return bytesCount;
 }
 
@@ -75,8 +70,8 @@ DeviceModel _deviceModelDeserialize(
 ) {
   final object = DeviceModel();
   object.id = id;
-  object.name = reader.readStringOrNull(offsets[0]);
-  object.relayId = reader.readLongOrNull(offsets[1]);
+  object.name = reader.readString(offsets[0]);
+  object.relayId = reader.readLong(offsets[1]);
   return object;
 }
 
@@ -88,9 +83,9 @@ P _deviceModelDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readStringOrNull(offset)) as P;
+      return (reader.readString(offset)) as P;
     case 1:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -242,25 +237,8 @@ extension DeviceModelQueryFilter
     });
   }
 
-  QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> nameIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'name',
-      ));
-    });
-  }
-
-  QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition>
-      nameIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'name',
-      ));
-    });
-  }
-
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> nameEqualTo(
-    String? value, {
+    String value, {
     bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -273,7 +251,7 @@ extension DeviceModelQueryFilter
   }
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> nameGreaterThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -288,7 +266,7 @@ extension DeviceModelQueryFilter
   }
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> nameLessThan(
-    String? value, {
+    String value, {
     bool include = false,
     bool caseSensitive = true,
   }) {
@@ -303,8 +281,8 @@ extension DeviceModelQueryFilter
   }
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> nameBetween(
-    String? lower,
-    String? upper, {
+    String lower,
+    String upper, {
     bool includeLower = true,
     bool includeUpper = true,
     bool caseSensitive = true,
@@ -390,26 +368,8 @@ extension DeviceModelQueryFilter
     });
   }
 
-  QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition>
-      relayIdIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'relayId',
-      ));
-    });
-  }
-
-  QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition>
-      relayIdIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'relayId',
-      ));
-    });
-  }
-
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> relayIdEqualTo(
-      int? value) {
+      int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'relayId',
@@ -420,7 +380,7 @@ extension DeviceModelQueryFilter
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition>
       relayIdGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -433,7 +393,7 @@ extension DeviceModelQueryFilter
   }
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> relayIdLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -446,8 +406,8 @@ extension DeviceModelQueryFilter
   }
 
   QueryBuilder<DeviceModel, DeviceModel, QAfterFilterCondition> relayIdBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -559,13 +519,13 @@ extension DeviceModelQueryProperty
     });
   }
 
-  QueryBuilder<DeviceModel, String?, QQueryOperations> nameProperty() {
+  QueryBuilder<DeviceModel, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
     });
   }
 
-  QueryBuilder<DeviceModel, int?, QQueryOperations> relayIdProperty() {
+  QueryBuilder<DeviceModel, int, QQueryOperations> relayIdProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'relayId');
     });

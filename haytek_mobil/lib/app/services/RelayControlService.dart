@@ -18,7 +18,7 @@ class RelayControlService {
         bool isActive = splitData[i] == '1';
         RelayModel relay = RelayModel()
           ..relay = i
-          ..isActive = isActive; // Örnek id ve isActive kullanımı
+          ..isActive = isActive;
         updatedRelays.add(relay);
       }
 
@@ -36,7 +36,7 @@ Future<void> setRelayInfo(int cardIndex, bool switchValue) async {
     'relay': cardIndex.toString(),
     'on': switchValue ? '1' : '0',
     'time': '0',
-    'pwd': '1515',
+    'pwd': '1515', // password burada direkt girildi ama dinamik yapılabilir
   };
 
   try {

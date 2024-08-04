@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:haytek_mobil/app/config/colors.dart';
-import 'package:provider/provider.dart';
 import 'package:haytek_mobil/app/providers/relay_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:haytek_mobil/app/providers/device_provider.dart';
 import 'package:haytek_mobil/app/screens/home/home_screen.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:haytek_mobil/app/models/device_model.dart';
 
 class AddInputDevice extends StatefulWidget {
   const AddInputDevice({super.key});
@@ -13,6 +15,7 @@ class AddInputDevice extends StatefulWidget {
 }
 
 class _AddInputDeviceState extends State<AddInputDevice> {
+  TextEditingController d_name_controller = TextEditingController();
   String? _selectedValue;
 
   @override
@@ -48,6 +51,7 @@ class _AddInputDeviceState extends State<AddInputDevice> {
                   const SizedBox(height: 20),
                   Container(
                     child: TextFormField(
+                      controller: d_name_controller,
                       style: TextStyle(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold,
@@ -78,8 +82,7 @@ class _AddInputDeviceState extends State<AddInputDevice> {
                           items: relayProvider.relays
                               .map<DropdownMenuItem<String>>((relay) {
                             return DropdownMenuItem<String>(
-                              value: relay.id
-                                  .toString(), // Relay id'si ya da uygun bir değer
+                              value: relay.id.toString(),
                               child: Text(relay.title ?? 'Bilinmeyen Röle'),
                             );
                           }).toList(),
@@ -98,6 +101,25 @@ class _AddInputDeviceState extends State<AddInputDevice> {
                     width: double.infinity,
                     child: TextButton(
                       onPressed: () {
+                        if (_selectedValue == null ||
+                            d_name_controller.text.isEmpty) {
+                          showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text('Uyarı'),
+                              content:
+                                  const Text('Lütfen tüm alanları doldurun.'),
+                              actions: [
+                                TextButton(
+                                  child: const Text('Tamam'),
+                                  onPressed: () => Navigator.of(context).pop(),
+                                ),
+                              ],
+                            ),
+                          );
+                          return;
+                        }
+
                         Future.delayed(Duration(milliseconds: 70), () {
                           showDialog(
                             context: context,
@@ -117,20 +139,44 @@ class _AddInputDeviceState extends State<AddInputDevice> {
                               ),
                               actions: <Widget>[
                                 TextButton(
-                                  child: Text('İptal'),
+                                  child: const Text('İptal'),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                 ),
                                 TextButton(
                                   child: const Text('Tamam'),
-                                  onPressed: () {
-                                    // Tamam butonuna basıldığında yapılacak işlemler buraya yazılır.
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) => HomeScreen(),
-                                      ),
-                                    );
+                                  onPressed: () async {
+                                    final newDevice = DeviceModel()
+                                      ..name = d_name_controller.text
+                                      ..relayId = int.parse(_selectedValue!);
+
+                                    try {
+                                      await Provider.of<DeviceProvider>(context,
+                                              listen: false)
+                                          .addDevice(newDevice);
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => HomeScreen(),
+                                        ),
+                                      );
+                                    } catch (e) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: const Text('Hata'),
+                                          content: const Text(
+                                              'Cihaz eklenirken bir hata oluştu.'),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('Tamam'),
+                                              onPressed: () =>
+                                                  Navigator.of(context).pop(),
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
                                   },
                                 ),
                               ],
